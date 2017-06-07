@@ -4,101 +4,81 @@ public class PCB {
     private String name;
     private float burstTime;
     private float arrivalTime;
-    private float executionTime;
     private float remainingTime;
     private float executed;
     private float beginTime;
     private float endTime;
-    private double averageExecutionTime, averageWaitTime;
+    private float waitTime;
 
-    /*PCB(int q, float arrivalTime, float executionTime, float remainingTime, float executed, double averageExecutionTime, double averageWaitTime, float beginTime, float endTime) {
-        quantum = q;
-        this.arrivalTime = arrivalTime;
-        this.executionTime = executionTime;
-        this.remainingTime = remainingTime;
-        this.executed = executed;
-        this.beginTime = beginTime;
-        this.endTime = endTime;
-        this.averageExecutionTime = averageExecutionTime;
-        this.averageWaitTime = averageWaitTime;
-    }*/
+    public float getWaitTime() {
+        return waitTime;
+    }
 
-    PCB (String name, float arrivalTime, float burstTime) {
-        System.out.println("processo criando: nome" + name + " arrival: " + arrivalTime + " burst: " + burstTime);
+    public void setWaitTime(float waitTime) {
+        this.waitTime = waitTime;
+    }
+
+    public void changeWaitTime(float value) {
+        this.waitTime -= this.arrivalTime;
+        this.waitTime += value;
+    }
+
+    public PCB (String name, float burstTime, float arrivalTime) {
+//        System.out.println("processo criando: nome" + name + " burst: " + burstTime + " arrival: " + arrivalTime );
         this.name = name;
         this.arrivalTime = arrivalTime;
         this.burstTime = burstTime;
     }
 
-    float getBeginTime() {
+    protected String getName(){
+        return this.name;
+    }
+
+    protected float getBurstTime() {
+        return burstTime;
+    }
+
+    protected void setBurstTime(float burstTime) {
+        this.burstTime = burstTime;
+    }
+
+    protected float getBeginTime() {
         return beginTime;
     }
 
-    void setBeginTime(float beginTime) {
+    protected void setBeginTime(float beginTime) {
         this.beginTime = beginTime;
     }
 
-    float getEndTime() {
+    protected float getEndTime() {
         return endTime;
     }
 
-    void setEndTime(float endTime) {
+    protected void setEndTime(float endTime) {
         this.endTime = endTime;
     }
 
-    public double getAverageExecutionTime() {
-        return averageExecutionTime;
-    }
-
-    void setAverageExecutionTime(float averageExecutionTime) {
-        this.averageExecutionTime = averageExecutionTime;
-    }
-
-    public double getAverageWaitTime() {
-        return averageWaitTime;
-    }
-
-    public void setAverageWaitTime(float averageWaitTime) {
-        this.averageWaitTime = averageWaitTime;
-    }
-
-    public float getQuantum() {
-        return quantum;
-    }
-
-    public void setQuantum(float quantum) {
-        this.quantum = quantum;
-    }
-
-    float getRemainingTime() {
+    protected float getRemainingTime() {
         return remainingTime;
     }
 
-    void setRemainingTime(float remainingTime) {
+    protected void setRemainingTime(float remainingTime) {
         this.remainingTime = remainingTime;
     }
 
-    float getExecuted() {
+    protected float getExecuted() {
         return executed;
     }
 
-    void setExecuted(float executed) {
+    protected void setExecuted(float executed) {
         this.executed = executed;
     }
 
-    float getArrivalTime() {
+    protected float getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(int arrivalTime) {
+    protected void setArrivalTime(int arrivalTime) {
         this.arrivalTime = arrivalTime;
-    }
-
-    float getExecutionTime() {
-        return executionTime;
-    }
-
-    public void setExecutionTime(int executionTime) {
-        this.executionTime = executionTime;
     }
 }

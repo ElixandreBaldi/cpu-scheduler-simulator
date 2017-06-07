@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Main {
-
+    private static PCB pcb[];
     private static void invalidArguments() {
         System.out.println("Invalid arguments.");
         System.exit(1);
@@ -33,7 +33,7 @@ public class Main {
             try {
                 JSONArray array = new JSONArray(contents);
                 int nProcess = array.length();
-                PCB pcb[] = new PCB[nProcess];
+                pcb = new PCB[nProcess];
                 for (int n = 0; n < nProcess; n++) {
                     JSONObject object = array.getJSONObject(n);
                     pcb[n] = new PCB(object.getString("name"), (float) object.getDouble("burst_time"), (float) object.getDouble("arrival_time"));
@@ -41,6 +41,8 @@ public class Main {
             } catch (JSONException j) {
                 invalidFile();
             }
+            fr.close();
+            br.close();
         } catch (IOException e) {
             invalidFile();
         }
@@ -64,30 +66,17 @@ public class Main {
         }
 
         if (Objects.equals(args[1], "fcfs")) {
-            FCFS firstComeFirstServed = new FCFS();
+            FCFS firstComeFirstServed = new FCFS(pcb);
         } else if (Objects.equals(args[1], "rr")) {
-            if (Objects.equals(args[2], "q")) {
+            if (Objects.equals(args[2], "-q")) {
                 quantum = Float.parseFloat(args[3]);
-                RR roundRobin = new RR(quantum);
+                RR roundRobin = new RR(quantum, pcb);
             } else {
                 invalidArguments();
             }
         } else {
             invalidArguments();
         }
-
-        /*float executionTime, arrivalTime;
-        Scheduler a = new Scheduler();
-        int q = sc.nextInt();
-        int n_processos = sc.nextInt();
-        int resta = 0, executando = 0, TTE = 0, TTESP = 0, begin_time = 0, end_time = 0;
-
-        for (int i = 0; i < n_processos; i++) {
-            executionTime = sc.nextInt();
-            arrivalTime = sc.nextInt();
-            a.setPcb(q, arrivalTime, executionTime, resta, executando, TTE, TTESP, begin_time, end_time);
-        }
-        a.firstComeFirstServed();*/
     }
 }
 /*
