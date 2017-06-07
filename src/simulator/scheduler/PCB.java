@@ -3,7 +3,6 @@ package simulator.scheduler;
 public class PCB {
     private String name;
     private float burstTime;
-    private float quantum;
     private float arrivalTime;
     private float executionTime;
     private float remainingTime;
